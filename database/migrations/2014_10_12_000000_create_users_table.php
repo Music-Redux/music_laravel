@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('first-name');
             $table->string('last-name');
             $table->binary('avatar');
-            $table->boolean('role');
+            $table->boolean('role')->default(0);
             $table->string('email')->unique();
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
