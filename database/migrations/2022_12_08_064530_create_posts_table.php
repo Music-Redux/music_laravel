@@ -15,11 +15,8 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
             $table->string('description');
-            $table->integer('rate');
             $table->boolean('status')->default(false);
-            $table->integer('total_reviews');
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')
                 ->references('id')
@@ -28,7 +25,6 @@ return new class extends Migration
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
