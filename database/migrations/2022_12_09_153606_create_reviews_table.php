@@ -21,6 +21,8 @@ return new class extends Migration
                 ->on('users')
                 ->onDelete('cascade');
             $table->text('review');
+            $table->bigInteger('song_id');
+
 
 
             $table->timestamps();
