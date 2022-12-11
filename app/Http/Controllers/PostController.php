@@ -14,7 +14,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::all();
+        return response()->json([
+            'data' => $posts
+        ]);
     }
 
     /**
@@ -35,7 +38,21 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'description' => 'required',
+            'user_id' => 'required',
+        ]);
+
+        $post = Post::create([
+            'user_id' => $request->user_id,
+            'description' => $request->description
+
+        ]);
+
+        $post->save();
+        return response()->json([
+            'data' => $post
+        ]);
     }
 
     /**
@@ -78,8 +95,12 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        //
+        Post::find($id)->delete();
+
+        return response()->json([
+            'message' => "post deleted successfult"
+        ]);
     }
 }

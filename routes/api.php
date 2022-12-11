@@ -2,8 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +34,9 @@ Route::get('/users', [UserController::class, 'index']);
 // show current user
 
 Route::get('/profile/{id}', [UserController::class, 'show']);
+
+Route::get('/posts', [PostController::class, 'index']);
+Route::get('/comments/{id}', [CommentController::class, 'index']);
+Route::post('/create_post', [PostController::class, 'store']);
+Route::post('/create_comment', [CommentController::class, 'store']);
+Route::delete('/delete_Post/{id}', [PostController::class, 'destroy']);
