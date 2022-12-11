@@ -21,4 +21,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/reviews', [ReviewController::class, 'index']);
+
+################# 
+// USERS
+
+// show all users
+
 Route::get('/users', [UserController::class, 'index']);
+
+// show current user
+
+Route::get('/profile/{id}', [UserController::class, 'show']);

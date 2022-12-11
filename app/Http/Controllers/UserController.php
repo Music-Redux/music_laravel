@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fav;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -49,7 +51,24 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        // show single user for the profile page
+
+$currentUser = User::find($id);
+// get user fav
+        $userFav = Fav::where('user_id', $id)->get();
+
+        // get user posts
+        $userPosts = Post::where('user_id', $id)->get();
+
+
+        return response()->json([
+            'data' => $currentUser,
+            'fav'=>$userFav,
+            'posts'=>$userPosts
+            
+        ]);
+
+
     }
 
     /**
