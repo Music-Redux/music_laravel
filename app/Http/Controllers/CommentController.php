@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -12,9 +13,16 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        // $comments = Comment::all();
+
+
+        $post = Post::find($id);
+        $comments = $post->comments;
+        return response()->json([
+            'data' => $comments
+        ]);
     }
 
     /**
@@ -35,7 +43,23 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'comment' => 'required',
+            'user_id' => 'required',
+            'post_id' => 'required',
+        ]);
+
+        $comment = Comment::create([
+            'comment' => $request->comment,
+            'post_id' => $request->post_id,
+            'user_id' => $request->user_id,
+
+        ]);
+
+        $comment->save();
+        return response()->json([
+            'data' => $comment
+        ]);
     }
 
     /**
