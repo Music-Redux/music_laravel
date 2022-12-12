@@ -92,6 +92,9 @@ $currentUser = User::find($id);
     public function update(Request $request, $id)
     {
         //
+        $user = User::find($id);
+        $user->update($request->all());
+        return $user;
     }
 
     /**
