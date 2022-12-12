@@ -49,4 +49,4 @@ Route::post('/create_comment', [CommentController::class, 'store']);
 Route::delete('/delete_Post/{id}', [PostController::class, 'destroy']);
 
 // update user
-Route::put('/profile/update/{id}', [UserController::class, 'update']);
+Route::post('/profile/update', [UserController::class, 'update']);

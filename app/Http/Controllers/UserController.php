@@ -58,7 +58,7 @@ class UserController extends Controller
         $userPosts = $currentUser->posts;
 
         return response()->json([
-            'data' => $currentUser,
+            'user' => $currentUser,
             'fav' => $userFav,
             'posts' => $userPosts
 
@@ -83,12 +83,30 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        $id = $request->id;
         $user = User::find($id);
-        $user->update($request->all());
-        return $user;
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+        ]);
+
+        // $image = base64_encode(file_get_contents($request->file('profile_image')));
+        $user->name = $request->name;
+        $user->email = $request->email;
+        // $user->avatar = $image;
+
+        //hash password
+        //create user
+        $user->save();
+
+        // $user->update($request->all());
+        return response()->json([
+            'user' => $user,
+
+        ]);
     }
 
     /**
