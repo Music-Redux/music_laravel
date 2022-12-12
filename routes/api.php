@@ -31,7 +31,7 @@ Route::apiResource('posts', PostController::class)->middleware('auth:sanctum');
 
 Route::get('/reviews', [ReviewController::class, 'index']);
 
-################# 
+#################
 // USERS
 
 // show all users
