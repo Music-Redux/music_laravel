@@ -53,22 +53,16 @@ class UserController extends Controller
     {
         // show single user for the profile page
 
-$currentUser = User::find($id);
-// get user fav
-        $userFav = Fav::where('user_id', $id)->get();
-
-        // get user posts
-        $userPosts = Post::where('user_id', $id)->get();
-
+        $currentUser = User::find($id);
+        $userFav = $currentUser->favourites;
+        $userPosts = $currentUser->posts;
 
         return response()->json([
             'data' => $currentUser,
-            'fav'=>$userFav,
-            'posts'=>$userPosts
-            
+            'fav' => $userFav,
+            'posts' => $userPosts
+
         ]);
-
-
     }
 
     /**
