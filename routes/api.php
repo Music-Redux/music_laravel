@@ -23,10 +23,23 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/reviews', [ReviewController::class, 'index']);
+
+#################
+// USERS
+
+// show all users
+
 Route::get('/users', [UserController::class, 'index']);
+
+// show current user
+
+Route::get('/profile/{id}', [UserController::class, 'show']);
+
 Route::get('/posts', [PostController::class, 'index']);
 Route::get('/comments/{id}', [CommentController::class, 'index']);
 Route::post('/create_post', [PostController::class, 'store']);
 Route::post('/create_comment', [CommentController::class, 'store']);
 Route::delete('/delete_Post/{id}', [PostController::class, 'destroy']);
-Route::delete('/delete_Comment/{id}', [CommentController::class, 'destroy']);
+
+// update user
+Route::put('/profile/update/{id}', [UserController::class, 'update']);
