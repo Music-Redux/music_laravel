@@ -5,7 +5,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReviewController;
+
 use App\Http\Controllers\FavController;
+
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\Api\AuthController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,12 +27,39 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('/auth/register', [AuthController::class, 'createUser']);
+Route::post('/auth/login', [AuthController::class, 'loginUser']);
+Route::apiResource('posts', PostController::class)->middleware('auth:sanctum');
+
+
+
 Route::get('/reviews', [ReviewController::class, 'index']);
+
+#################
+// USERS
+
+// show all users
+
 Route::get('/users', [UserController::class, 'index']);
+
 Route::get('/favorite', [FavController::class, 'index']);
+
+
+// show current user
+
+Route::get('/profile/{id}', [UserController::class, 'show']);
+
 Route::get('/posts', [PostController::class, 'index']);
+Route::get('/comments/{id}', [CommentController::class, 'index']);
 Route::post('/create_post', [PostController::class, 'store']);
-Route::delete('/delete_Post/{id}', [PostController::class, 'destroy']);
+
 Route::post('/add_favorite', [FavController::class, 'store']);
 Route::post('/delete_favorite', [FavController::class, 'destroy']);
 Route::post('/getfav', [FavController::class, 'getFavByUserId']);
+
+Route::post('/create_comment', [CommentController::class, 'store']);
+Route::delete('/delete_Post/{id}', [PostController::class, 'destroy']);
+
+// update user
+Route::post('/profile/update', [UserController::class, 'update']);
+
