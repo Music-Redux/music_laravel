@@ -18,7 +18,6 @@ class AuthController extends Controller
      */
     public function createUser(Request $request)
     {
-
         try {
             //Validated
             $validateUser = Validator::make(
@@ -75,7 +74,6 @@ class AuthController extends Controller
                     'password' => 'required'
                 ]
             );
-
             if ($validateUser->fails()) {
                 return response()->json([
                     'status' => false,
