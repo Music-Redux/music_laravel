@@ -14,7 +14,10 @@ class FavController extends Controller
      */
     public function index()
     {
-        //
+        $favorite = Fav::all();
+        return response()->json([
+            'data' => $favorite
+        ]);
     }
 
     /**
@@ -35,7 +38,21 @@ class FavController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'song_id' => 'required',
+            'user_id' => 'required',
+        ]);
+
+        $favorite = Fav::create([
+            'user_id' => $request->user_id,
+            'song_id' => $request->song_id
+
+        ]);
+
+        $favorite->save();
+        return response()->json([
+            'data' => $favorite
+        ]);
     }
 
     /**
@@ -78,8 +95,21 @@ class FavController extends Controller
      * @param  \App\Models\Fav  $fav
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Fav $fav)
+    public function destroy(Request $request)
     {
-        //
+        $user_id = $request->user_id;
+        $song_id = $request->song_id;
+
+        $fav = Fav::where('user_id', $user_id)->where('song_id', $song_id)->delete();
+        return response()->json(
+            $fav
+        );
+    }
+
+    public function getFavByUserId(Request $request)
+    {
+        $user_id = $request->user_id;
+        $fav = Fav::where('user_id', $user_id)->get();
+        return response()->json($fav);
     }
 }
