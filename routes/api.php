@@ -50,4 +50,4 @@ Route::delete('/delete_Post/{id}', [PostController::class, 'destroy']);
 Route::delete('/delete_comment/{id}', [CommentController::class, 'destroy']);
 
 // update user
-Route::put('/profile/update/{id}', [UserController::class, 'update']);
+Route::post('/profile/update', [UserController::class, 'update']);
