@@ -51,6 +51,7 @@ Route::get('/profile/{id}', [UserController::class, 'show']);
 
 Route::get('/posts', [PostController::class, 'index']);
 Route::get('/comments/{id}', [CommentController::class, 'index']);
+Route::get('/comments', [CommentController::class, 'getAllComment']);
 Route::post('/create_post', [PostController::class, 'store']);
 
 Route::post('/add_favorite', [FavController::class, 'store']);
