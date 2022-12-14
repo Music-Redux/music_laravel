@@ -15,9 +15,6 @@ class CommentController extends Controller
      */
     public function index($id)
     {
-        // $comments = Comment::all();
-
-
         $post = Post::find($id);
         $comments = $post->comments;
         return response()->json([
