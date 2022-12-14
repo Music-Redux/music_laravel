@@ -10,7 +10,8 @@ class CommentController extends Controller
 {
 
 
-    public function getAllComment(){
+    public function getAllComment()
+    {
         return response()->json(Comment::all());
     }
     /**
@@ -20,9 +21,6 @@ class CommentController extends Controller
      */
     public function index($id)
     {
-        // $comments = Comment::all();
-
-
         $post = Post::find($id);
         $comments = $post->comments;
         return response()->json([
@@ -110,7 +108,6 @@ class CommentController extends Controller
     public function destroy($id)
     {
         Comment::find($id)->delete();
-
         return response()->json([
             'message' => "comment deleted successfult"
         ]);
