@@ -36,8 +36,6 @@ class AuthController extends Controller
                     'errors' => $validateUser->errors()
                 ], 401);
             }
-
-
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -58,7 +56,6 @@ class AuthController extends Controller
             ], 500);
         }
     }
-
     /**
      * Login The User
      * @param Request $request
@@ -100,7 +97,7 @@ class AuthController extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
-                'message' => $th->getMessage()
+                'message' => $th->getMessage(),
             ], 500);
         }
     }
