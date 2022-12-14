@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+
+
+    public function getAllComment(){
+        return response()->json(Comment::all());
+    }
     /**
      * Display a listing of the resource.
      *
