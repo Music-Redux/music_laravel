@@ -54,7 +54,7 @@ Route::get('/comments/{id}', [CommentController::class, 'index']);
 Route::post('/create_post', [PostController::class, 'store']);
 
 Route::post('/add_favorite', [FavController::class, 'store']);
-Route::post('/delete_favorite', [FavController::class, 'destroy']);
+Route::delete('/delete_favorite', [FavController::class, 'destroy']);
 Route::post('/getfav', [FavController::class, 'getFavByUserId']);
 
 Route::post('/create_comment', [CommentController::class, 'store']);
