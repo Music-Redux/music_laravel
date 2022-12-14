@@ -25,10 +25,10 @@ class AuthController extends Controller
                 [
                     'name' => 'required',
                     'email' => 'required|email|unique:users,email',
+                    'avatar' => 'required',
                     'password' => 'required'
                 ]
             );
-
             if ($validateUser->fails()) {
                 return response()->json([
                     'status' => false,
@@ -37,9 +37,11 @@ class AuthController extends Controller
                 ], 401);
             }
 
+
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
+                'avatar' => $request->avatar,
                 'password' => Hash::make($request->password)
             ]);
             auth()->login($user);
@@ -72,7 +74,6 @@ class AuthController extends Controller
                     'password' => 'required'
                 ]
             );
-
             if ($validateUser->fails()) {
                 return response()->json([
                     'status' => false,
