@@ -5,8 +5,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReviewController;
+
+use App\Http\Controllers\FavController;
+
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Api\AuthController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +42,9 @@ Route::get('/reviews', [ReviewController::class, 'index']);
 
 Route::get('/users', [UserController::class, 'index']);
 
+Route::get('/favorite', [FavController::class, 'index']);
+
+
 // show current user
 
 Route::get('/profile/{id}', [UserController::class, 'show']);
@@ -45,9 +52,15 @@ Route::get('/profile/{id}', [UserController::class, 'show']);
 Route::get('/posts', [PostController::class, 'index']);
 Route::get('/comments/{id}', [CommentController::class, 'index']);
 Route::post('/create_post', [PostController::class, 'store']);
+
+Route::post('/add_favorite', [FavController::class, 'store']);
+Route::post('/delete_favorite', [FavController::class, 'destroy']);
+Route::post('/getfav', [FavController::class, 'getFavByUserId']);
+
 Route::post('/create_comment', [CommentController::class, 'store']);
 Route::delete('/delete_Post/{id}', [PostController::class, 'destroy']);
 Route::delete('/delete_comment/{id}', [CommentController::class, 'destroy']);
 
 // update user
 Route::post('/profile/update', [UserController::class, 'update']);
+
