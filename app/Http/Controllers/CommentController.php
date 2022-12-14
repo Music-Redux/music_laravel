@@ -109,7 +109,7 @@ class CommentController extends Controller
     {
         Comment::find($id)->delete();
         return response()->json([
-            'message' => "comment deleted successfult"
+            'message' => "comment deleted successful"
         ]);
     }
 }
